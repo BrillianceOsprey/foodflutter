@@ -21,7 +21,7 @@ class _HomeState extends State<Home> {
           ),
           children: [
             TextSpan(
-              text: "Food",
+              text: "Food flutter",
               style: TextStyle(
                 color: Colors.white
               )
