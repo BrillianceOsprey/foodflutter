@@ -1,9 +1,12 @@
 
-/*
-
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:foodflutter/auth/login_status.dart';
+import 'package:foodflutter/login_screen.dart';
+import 'package:provider/provider.dart';
+
+import 'auth/auth.dart';
 
 class registerScreen extends StatefulWidget {
   const registerScreen({super.key});
@@ -25,13 +28,12 @@ class _registerScreenState extends State<registerScreen> {
           decoration: BoxDecoration(color: Colors.pink),
           child: Column(
             children: [
+              SizedBox(height: 90,),
               Padding(
-                  padding: const EdgeInsets.all(93),
+                  padding: const EdgeInsets.all(20),
                   child: Column(
                     children: [
-                     const SizedBox(
-                        height: 60,
-                      ),
+                     
                       Center(
                         child: Text(
                           "Register",
@@ -50,8 +52,11 @@ class _registerScreenState extends State<registerScreen> {
                               fontWeight: FontWeight.bold),
                         ),
                       ),
+                      SizedBox(height: 20,),
                     ],
                   )),
+
+
               Expanded(
                   child: Container(
                       //decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.only(topLeft: Radius.circular(43))),
@@ -69,6 +74,9 @@ class _registerScreenState extends State<registerScreen> {
                               Container(
                                 decoration: BoxDecoration(color: Colors.white),
                               ),
+                               
+                              
+                              
                               Form(
                                   key: key,
                                   child: Column(
@@ -93,7 +101,7 @@ class _registerScreenState extends State<registerScreen> {
                                         ),
                                       ),
                                       SizedBox(
-                                        height: 12,
+                                        height: 20,
                                       ),
                                       Container(
                                         decoration: BoxDecoration(
@@ -109,7 +117,7 @@ class _registerScreenState extends State<registerScreen> {
                                           ),
                                           validator: (val) {
                                             if (val == null || val.isEmpty) {
-                                              return "Name Must Not be Empty";
+                                              return "Email Must Not be Empty";
                                             }
                                           },
                                         ),
@@ -142,12 +150,12 @@ class _registerScreenState extends State<registerScreen> {
                                       ),
                                       TextButton(
                                           onPressed: () {
-                                           
+                                   Navigator.push(context, MaterialPageRoute(builder: (context)=> LoginScreen()));        
                                           },
                                           child: Text(
-                                            "Please Login",
+                                            "Please Login", 
                                             style:
-                                                TextStyle(color: Colors.pink),
+                                                TextStyle(color: Colors.pink, fontSize: 32),
                                           )),
                                       SizedBox(
                                         height: 7,
@@ -164,8 +172,12 @@ class _registerScreenState extends State<registerScreen> {
                                               // async
                                               if (key.currentState!
                                                   .validate()) {
-                                                // Map<String,dynamic> status = await Auth().register(emailController.text, passwordController.text );
-                                    
+                                           //   Map<String,dynamic> status = await Auth().register(emailController.text, passwordController.text );
+                                          
+                                      //    if(status['status']){// if status is true , use provider
+                                       //     Provider.of<LoginStatus>(context, listen: false).setStatus(true);
+                                       //  Navigator.pop(context);
+                                       //   }
                                               }
 
                                              
@@ -179,15 +191,24 @@ class _registerScreenState extends State<registerScreen> {
                                       )
                                     ],
                                   ))
-                            ],
-                          ),
+
+                                  ],
+                                ),
+                              )
+
+
+
+
+
+                            
+                      
                         ),
                       )
                       // ],),
-                      ))
+                      )
             ],
           )),
     );
   }
 }
-*/
+  

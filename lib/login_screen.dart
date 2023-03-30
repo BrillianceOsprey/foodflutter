@@ -1,5 +1,10 @@
-/*
+
 import 'package:flutter/material.dart';
+import 'package:foodflutter/auth/auth.dart';
+import 'package:foodflutter/auth/login_status.dart';
+import 'package:foodflutter/main.dart';
+import 'package:foodflutter/register_screen.dart';
+import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -58,6 +63,7 @@ class _LoginScreenState extends State<LoginScreen> {
             
             children: [
               
+              
               Form(
                 key: key,
                 child: Column(children: [
@@ -107,8 +113,11 @@ class _LoginScreenState extends State<LoginScreen> {
             
            const SizedBox(height: 40,),
              TextButton(onPressed: (){
-
-             // BlocProvider.of<BlocPage>(context).add(RegisterEvent());
+          
+          Navigator.push(context, MaterialPageRoute(builder: (context)=> registerScreen()));
+          
+          
+          //   BlocProvider.of<BlocPage>(context).add(RegisterEvent());
              }, child: const Text("Create New Account", style: TextStyle(fontSize: 20),)),
            
           const SizedBox(height: 27,),
@@ -119,11 +128,19 @@ class _LoginScreenState extends State<LoginScreen> {
             width: MediaQuery.of(context).size.width*0.25,  //0.5 is 1/2 , 0.25 is 1/4
             child: TextButton(onPressed: (){
              if(key.currentState!.validate()){
+            
+      //   Map<String,dynamic>   result = await Auth().login(emailController.text, passwordController.text);
+       //    if(result['status']){
 
+         //   Provider.of<LoginStatus>(context, listen: false ).setStatus(true);
+          //  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> MyApp()));
+          
+        //   }
              }
              }, child: const Text("LogIn",style: TextStyle(color: Colors.pink, fontSize: 22),)),
              )
              ],))
+              
             ],
           ) ,
           
@@ -151,4 +168,4 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 }
 
-*/
+   

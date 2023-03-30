@@ -1,3 +1,5 @@
+/*
+// ignore_for_file: avoid_print
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -11,6 +13,7 @@ class PorductList extends StatefulWidget {
 }
 
 class _PorductListState extends State<PorductList> {
+  
   @override
   Widget build(BuildContext context) {
     Stream<QuerySnapshot> product =
@@ -117,5 +120,85 @@ class _PorductListState extends State<PorductList> {
         */
               });
         });
+  }
+}
+*/
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
+import 'package:foodflutter/components/detail_screen.dart';
+import 'package:foodflutter/components/product.dart';
+
+class ProductList extends StatefulWidget {
+  const ProductList({super.key});
+
+  @override
+  State<ProductList> createState() => _ProductListState();
+}
+
+class _ProductListState extends State<ProductList> {
+
+  Stream<QuerySnapshot> products = FirebaseFirestore.instance.collection("products").snapshots();
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+
+      child: StreamBuilder(
+        stream: products,
+        builder: (context, AsyncSnapshot<QuerySnapshot> snapshots){
+        return GridView.builder(
+          physics: const ScrollPhysics(),
+          shrinkWrap: true,
+          itemCount: snapshots.data?.docs.length,
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          
+          crossAxisCount: 2, 
+          childAspectRatio: 0.7, // to do gap between two photo above and below
+          ), 
+          
+          itemBuilder: (BuildContext context, index){
+         return InkWell( // if click on product, gto to detai , use InkWell
+
+         onTap: (){
+         Product product= Product(
+          snapshots.data!.docs[index].id,
+          snapshots.data!.docs[index]['name'], 
+          snapshots.data!.docs[index]['price'],
+          snapshots.data!.docs[index]['description'], 
+          snapshots.data!.docs[index]['image'],
+           snapshots.data!.docs[index]['shop'] );
+          Navigator.push(context, MaterialPageRoute(builder: (context)=> DetailScreen(snapshots.data!.docs[index].id , product)));
+         },
+          child: SingleChildScrollView(
+          child: Column(
+            children: [
+            
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 5),
+                child: Image.network("${snapshots.data?.docs[index]["image"]}"),
+              ),
+
+              Container(
+                child: Column(
+                  children: [
+                    Text("${snapshots.data?.docs[index]['name']}", style: const TextStyle(color: Colors.pink, fontWeight: FontWeight.bold, fontSize: 18),),
+                     Text("${snapshots.data?.docs[index]['price']} MMK", style: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 18),)
+                 
+                 
+                 
+                  ],
+                ),
+              )
+            ],
+
+          ),
+          
+         ),
+         );
+
+          });
+
+      }),
+    );
   }
 }

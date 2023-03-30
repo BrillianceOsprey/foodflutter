@@ -1,7 +1,13 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:foodflutter/screen/body.dart';
+import 'package:foodflutter/auth/login_status.dart';
+import 'package:foodflutter/main.dart';
+import 'package:provider/provider.dart';
+
+import '../auth/auth.dart';
+import '../components/body.dart';
+//import 'package:foodflutter/screen/body.dart';
 class Home extends StatefulWidget {
   const Home({super.key});
 
@@ -28,7 +34,7 @@ class _HomeState extends State<Home> {
             ),
             TextSpan(
               text: "Order",
-              style: TextStyle(color: Colors.red)
+              style: TextStyle(color: Colors.white)
             )
           ]
         )),
@@ -37,7 +43,17 @@ class _HomeState extends State<Home> {
           }, icon: SvgPicture.asset("assets/icon/basket.svg"),
         ) ],    
        ),
-       bottomNavigationBar: BottomNavigationBar(items: const [
+       bottomNavigationBar: BottomNavigationBar(
+        onTap: (index){
+        //  if( index == 2){
+          // Auth().logout();
+         //   Provider.of<LoginStatus>(context, listen: false).setStatus(false);
+         //   Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> MyApp()));
+        //  }
+        }, 
+        currentIndex: 0,
+        
+        items: const [
         BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
         BottomNavigationBarItem(icon: Icon(Icons.shop), label: "Cart"),
          BottomNavigationBarItem(icon: Icon(Icons.logout), label: "Logout"),   

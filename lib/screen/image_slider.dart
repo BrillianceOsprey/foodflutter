@@ -13,6 +13,7 @@ class _ImageSliderState extends State<ImageSlider> {
   Widget build(BuildContext context) {
     return CarouselSlider(
       items: [
+        /*
         Image.asset("assets/hkc.jpeg"),
         Image.asset("assets/stanford.jpeg"),
         Image.asset("assets/building.jpeg"),
@@ -20,29 +21,44 @@ class _ImageSliderState extends State<ImageSlider> {
         Image.asset("assets/stanford.jpeg"),
         Image.asset("assets/hkc.jpeg"),
         Image.asset("assets/Lse_library_interior.jpeg"),
-        // Container(
-        //   width: MediaQuery.of(context).size.width,
-        //   height: 60,
-        //   decoration: const BoxDecoration(
 
-        //       // image: DecorationImage(
-        //       //fit: BoxFit.fill,
-        //       //   image: AssetImage("")
-        //       //  )
+        */
+         Container(
+          width: MediaQuery.of(context).size.width,
+          height: 60,
+          decoration: const BoxDecoration(
 
-        //       ),
-        // ),
-        // Container(
-        //   width: MediaQuery.of(context).size.width,
-        //   height: 60,
-        //   decoration: const BoxDecoration(
-        //       // image: DecorationImage(
-        //       //fit: BoxFit.fill,
-        //       //   image: AssetImage("")
-        //       //  )
+        image: DecorationImage(
+             fit: BoxFit.fill,
+          image: AssetImage("assets/hkc.jpeg")
+         )
 
-        //       ),
-        // ),
+            ),
+        ),
+
+
+        Container(
+          width: MediaQuery.of(context).size.width,
+         height: 60,
+         decoration: const BoxDecoration(
+         image: DecorationImage(
+        fit: BoxFit.fill,
+         image: AssetImage("assets/building.jpeg")
+         )
+
+             ),
+         ),
+
+         Container(
+          width: MediaQuery.of(context).size.width,
+          height: 60,
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              fit: BoxFit.fill,
+              image: AssetImage("assets/Lse_library_interior.jpeg"))
+          ),
+
+         )
       ],
       options: CarouselOptions(
         autoPlay: true,

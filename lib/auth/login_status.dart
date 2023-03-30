@@ -1,6 +1,5 @@
 
 //import 'dart:js';
-
 import 'package:flutter/material.dart';
 
 class LoginStatus extends ChangeNotifier{
@@ -9,11 +8,11 @@ class LoginStatus extends ChangeNotifier{
 
   setStatus(bool val){
     // this.status = val;
-    status = val;
+    this.status = val;
   }
 
   getStatus(){
     //return this.status;
-    return status;
+    return this.status;
   }
 }
