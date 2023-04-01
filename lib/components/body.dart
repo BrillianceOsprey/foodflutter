@@ -1,7 +1,3 @@
-
-
-
-
 import 'package:flutter/material.dart';
 import 'package:foodflutter/components/discount_card.dart';
 
@@ -22,19 +18,18 @@ class Body extends StatefulWidget {
 class _BodyState extends State<Body> {
   @override
   Widget build(BuildContext context) {
-
     return SingleChildScrollView(
       child: Column(
         // ignore: prefer_const_literals_to_create_immutables
         children: [
           const SearchBox(),
           const ImageSlider(),
-        const  CategoryList(),
-         const DiscountCard(),
-           const SizedBox(height: 20,),
+          const CategoryList(),
+          const DiscountCard(),
+          //    const SizedBox(height: 20,),
           const ProductList()
 
-         // const PorductList() //PorductList()
+          // const PorductList() //PorductList()
 
           // DebugPage()
         ],

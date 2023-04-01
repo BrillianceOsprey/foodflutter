@@ -29,8 +29,8 @@ class _DetailScreenState extends State<DetailScreen> {
         actions: [
           IconButton(
               onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => CartView()));
+                // Navigator.push(context,
+                //     MaterialPageRoute(builder: (context) => CartView()));
               },
               icon: Row(
                 children: [
