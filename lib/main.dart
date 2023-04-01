@@ -1,10 +1,7 @@
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:foodflutter/auth/login_status.dart';
 import 'package:foodflutter/carts/cart.dart';
-import 'package:foodflutter/login_screen.dart';
-
 import 'package:foodflutter/screen/home.dart';
 import 'package:provider/provider.dart';
 
