@@ -51,7 +51,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => Cart()),
+        ChangeNotifierProvider(
+          create: (context) => Cart(),
+        ),
       ],
       child: MaterialApp(
         theme: ThemeData(primarySwatch: Colors.pink),

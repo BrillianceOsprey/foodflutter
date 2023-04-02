@@ -1,4 +1,4 @@
-
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:flutter/material.dart';
@@ -36,19 +36,18 @@ class _CategoryListState extends State<CategoryList> {
     Stream<QuerySnapshot> categories =
         FirebaseFirestore.instance.collection("categories").snapshots();
     return Column(children: [
-   
       StreamBuilder<QuerySnapshot>(
         stream: categories,
         //  stream: FirebaseFirestore.instance.collection("").snapshots(),
 
         builder: (context, AsyncSnapshot<QuerySnapshot> snapshots) {
           // builder: (context,AsyncSnapshot snapshots) {
-          return Container(
+          return SizedBox(
             height: 40,
             child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 shrinkWrap: true,
-                 physics: const BouncingScrollPhysics(),
+                physics: const BouncingScrollPhysics(),
                 itemCount: snapshots.data?.docs.length,
                 itemBuilder: (context, index) {
                   // DocumentSnapshot image = snapshots.data?.docs[index];
@@ -82,20 +81,21 @@ class _CategoryListState extends State<CategoryList> {
 
               //future: storage.downloadURL('1RWJTqrAiILuN9vLeSO7'),
               future: categoryProducts,
-              builder: (context, AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
-               
+              builder: (context,
+                  AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
                 // ignore: sized_box_for_whitespace
                 return Container(
                   height: 220,
                   // width: MediaQuery.of(context).size.width*0.7,
                   child: ListView.builder(
-                     scrollDirection: Axis.horizontal, // if no horizontak, it is vertical in origin
-                    //  physics: const BouncingScrollPhysics(),
-                     physics: const ScrollPhysics(),
+                      scrollDirection: Axis
+                          .horizontal, // if no horizontak, it is vertical in origin
+                      //  physics: const BouncingScrollPhysics(),
+                      physics: const ScrollPhysics(),
                       shrinkWrap: true,
                       itemCount: snapshot.data?.docs.length,
                       itemBuilder: (context, index) {
-                       // return Text("${snapshot.data?.docs[index]['name']}");
+                        // return Text("${snapshot.data?.docs[index]['name']}");
 
                         return Container(
                           margin: const EdgeInsets.only(
@@ -109,27 +109,54 @@ class _CategoryListState extends State<CategoryList> {
                                   blurRadius: 20,
                                 )
                               ]),
-
-                              child: Padding(padding: const EdgeInsets.all(25),
-                              child: Column(
-                                children: [
-                                  const SizedBox(height: 5,),
-                                  Container(child: Text("${snapshot.data?.docs[index]['name']}", style: const TextStyle(color: Colors.pink, fontWeight: FontWeight.bold),), ),
-                                  const SizedBox(height: 5,),
-                                   Container(
-                                    padding: const EdgeInsets.all(0),
-                                    child: Image.network("${snapshot.data?.docs[index]['image']}"), height: 120,),
-
-                                ],
-                              ),
-                              ),
-                              
-                               ); 
+                          child: Padding(
+                            padding: const EdgeInsets.all(25),
+                            child: Column(
+                              children: [
+                                const SizedBox(
+                                  height: 5,
+                                ),
+                                SizedBox(
+                                  child: Text(
+                                    "${snapshot.data?.docs[index]['name']}",
+                                    style: const TextStyle(
+                                        color: Colors.pink,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 5,
+                                ),
+                                Container(
+                                  padding: const EdgeInsets.all(0),
+                                  height: 120,
+                                  // child: Image.network(
+                                  //     "${snapshot.data?.docs[index]['image']}"),
+                                  child: CachedNetworkImage(
+                                    imageUrl: snapshot
+                                            .data?.docs[index]['image']
+                                            .toString() ??
+                                        '',
+                                    progressIndicatorBuilder:
+                                        (context, url, downloadProgress) =>
+                                            SizedBox(
+                                      height: 50,
+                                      width: 50,
+                                      child: CircularProgressIndicator(
+                                          value: downloadProgress.progress),
+                                    ),
+                                    errorWidget: (context, url, error) =>
+                                        const Icon(Icons.circle,
+                                            color: Colors.grey, size: 40),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
                       }),
                 );
-              })
-              ),
+              })),
     ]);
   }
 }
-
