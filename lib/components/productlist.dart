@@ -156,75 +156,87 @@ class _ProductListState extends State<ProductList> {
       child: StreamBuilder(
           stream: products,
           builder: (context, AsyncSnapshot<QuerySnapshot> snapshots) {
-            if (products == null) {
-              return Text('Hello');
-            } else {
-              return GridView.builder(
-                  physics: const ScrollPhysics(),
-                  shrinkWrap: true,
-                  // itemCount: snapshots.data?.docs.length,
-                  itemCount: 4,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    childAspectRatio:
-                        0.7, // to do gap between two photo above and below
-                  ),
-                  itemBuilder: (BuildContext context, index) {
-                    return InkWell(
-                      // if click on product, gto to detai , use InkWell
+            return GridView.builder(
+                physics: const ScrollPhysics(),
+                shrinkWrap: true,
+                // itemCount: snapshots.data?.docs.length,
+                itemCount: 4,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  childAspectRatio:
+                      0.7, // to do gap between two photo above and below
+                ),
+                itemBuilder: (BuildContext context, index) {
+                  return InkWell(
+                    // if click on product, gto to detai , use InkWell
 
-                      onTap: () {
-                        // Product product = Product(
-                        //     snapshots.data!.docs[index].id,
-                        //     snapshots.data!.docs[index]['name'],
-                        //     snapshots.data!.docs[index]['price'],
-                        //     snapshots.data!.docs[index]['description'],
-                        //     snapshots.data!.docs[index]['image'],
-                        //     snapshots.data!.docs[index]['shop']);
-                        // Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //         builder: (context) => DetailScreen(
-                        //             snapshots.data!.docs[index].id, product)));
-                      },
-                      child: SingleChildScrollView(
-                        child: Column(
-                          children: [
-                            Container(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 5),
-                              // child: Image.network(
-                              //     "${snapshots.data?.docs[index]["image"]}"),
-                              child: Container(
-                                height: 200,
-                                width: double.infinity,
-                                color: Colors.amber,
-                              ),
+                    onTap: () {
+                      // Product product = Product(
+                      //     snapshots.data!.docs[index].id,
+                      //     snapshots.data!.docs[index]['name'],
+                      //     snapshots.data!.docs[index]['price'],
+                      //     snapshots.data!.docs[index]['description'],
+                      //     snapshots.data!.docs[index]['image'],
+                      //     snapshots.data!.docs[index]['shop']);
+                      if (!snapshots.hasData) {
+                        return;
+                      } else {
+                        Product product = Product(
+                          snapshots.data!.docs[index].id,
+                          snapshots.data!.docs[index]['name'],
+                          snapshots.data!.docs[index]['price'],
+                          snapshots.data!.docs[index]['description'],
+                          snapshots.data!.docs[index]['image'],
+                          snapshots.data!.docs[index]['shop'],
+                        );
+
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => DetailScreen(
+                              id: snapshots.data!.docs[index].id,
+                              product: product,
                             ),
-                            // Column(
-                            //   children: [
-                            //     Text(
-                            //       "${snapshots.data?.docs[index]['name']}",
-                            //       style: const TextStyle(
-                            //           color: Colors.pink,
-                            //           fontWeight: FontWeight.bold,
-                            //           fontSize: 18),
-                            //     ),
-                            //     Text(
-                            //       "${snapshots.data?.docs[index]['price']} MMK",
-                            //       style: const TextStyle(
-                            //           color: Colors.black,
-                            //           fontWeight: FontWeight.bold,
-                            //           fontSize: 18),
-                            //     )
-                            //   ],
-                            // )
-                          ],
-                        ),
+                          ),
+                        );
+                      }
+                    },
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 5),
+                            child: Image.network(
+                                "${snapshots.data?.docs[index]["image"]}"),
+                            // child: Container(
+                            //   height: 200,
+                            //   width: double.infinity,
+                            //   color: Colors.amber,
+                            // ),
+                          ),
+                          Column(
+                            children: [
+                              Text(
+                                "${snapshots.data?.docs[index]['name']}",
+                                style: const TextStyle(
+                                    color: Colors.pink,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18),
+                              ),
+                              Text(
+                                "${snapshots.data?.docs[index]['price']} MMK",
+                                style: const TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18),
+                              )
+                            ],
+                          )
+                        ],
                       ),
-                    );
-                  });
-            }
+                    ),
+                  );
+                });
           }),
       // child: Text('Hello'),
     );

@@ -1,17 +1,23 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'package:foodflutter/carts/cart_product.dart';
 import 'package:foodflutter/components/cart_view.dart';
 import 'package:foodflutter/components/product.dart';
-import 'package:provider/provider.dart';
 
 import '../carts/cart.dart';
 
 class DetailScreen extends StatefulWidget {
   //const DetailScreen({super.key});
-  late String id;
-  Product product;
-  DetailScreen(this.id, this.product);
+  final String? id;
+  final Product product;
+  const DetailScreen({
+    Key? key,
+    this.id,
+    required this.product,
+  }) : super(key: key);
+  // DetailScreen(this.id, this.product, {super.key});
   @override
   State<DetailScreen> createState() => _DetailScreenState();
 }
